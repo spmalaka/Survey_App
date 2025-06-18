@@ -105,10 +105,3 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-
-
-
-  
-  
-
-  
