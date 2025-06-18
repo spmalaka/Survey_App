@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <nav>
+        <ul class="navbar">
+            <li class="logo">_Surveys</li>
+            <li class="nav-links">
+                <a href="{{ url_for('index') }}">FILL OUT SURVEY</a>
+                <a href="{{ url_for('results') }}">VIEW SURVEY RESULTS</a>
+            </li>
+        </ul>        
+      </nav>      
+
+    <div class="form-container">
+        <form method="POST" action="/submit" id="survey-form">
+            <div class="form-section">
+                <div class="section-title">Personal Details :</div>
+                <div class="section-content">
+                    <label>Full Names:</label><br>
+                    <input type="text" name="full_name" required><br>
+
+                    <label>Email:</label><br>
+                    <input type="email" name="email" required><br>
+
+                    <label>Date of Birth:</label><br>
+                    <input type="date" name="date_of_birth" id="date_of_birth" required><br>
+                    <span id="dob-error" style="color: red;"></span><br>
+
+                    <label>Contact Number:</label><br>
+                    <input type="text" name="contact_number" required><br><br>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <div class="section-title">What is your favorite food?</div>
+                <div class="section-content">
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="pizza" name="favorite_food" value="Pizza">
+                            <label for="pizza">Pizza</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="pasta" name="favorite_food" value="Pasta">
+                            <label for="pasta">Pasta</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="papandwors" name="favorite_food" value="Pap and Wors">
+                            <label for="papandwors">Pap and Wors</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="other" name="favorite_food" value="other">
+                            <label for="other">Other</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="rating-section">
+                <div class="rating-instruction">
+                    Please rate your level of agreement on a scale from 1 to 5, with 1 being "strongly agree" and 5 being "strongly disagree."
+                </div>
+                
+                <table class="rating-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Strongly Agree</th>
+                            <th>Agree</th>
+                            <th>Neutral</th>
+                            <th>Disagree</th>
+                            <th>Strongly Disagree</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>I like to watch movies</td>
+                            <td><input type="radio" name="movies" value="1"></td>
+                            <td><input type="radio" name="movies" value="2"></td>
+                            <td><input type="radio" name="movies" value="3"></td>
+                            <td><input type="radio" name="movies" value="4"></td>
+                            <td><input type="radio" name="movies" value="5"></td>
+                        </tr>
+                        <tr>
+                            <td>I like to listen to radio</td>
+                            <td><input type="radio" name="radio" value="1"></td>
+                            <td><input type="radio" name="radio" value="2"></td>
+                            <td><input type="radio" name="radio" value="3"></td>
+                            <td><input type="radio" name="radio" value="4"></td>
+                            <td><input type="radio" name="radio" value="5"></td>
+                        </tr>
+                        <tr>
+                            <td>I like to eat out</td>
+                            <td><input type="radio" name="eating_out" value="1"></td>
+                            <td><input type="radio" name="eating_out" value="2"></td>
+                            <td><input type="radio" name="eating_out" value="3"></td>
+                            <td><input type="radio" name="eating_out" value="4"></td>
+                            <td><input type="radio" name="eating_out" value="5"></td>
+                        </tr>
+                        <tr>
+                            <td>I like to watch TV</td>
+                            <td><input type="radio" name="tv" value="1"></td>
+                            <td><input type="radio" name="tv" value="2"></td>
+                            <td><input type="radio" name="tv" value="3"></td>
+                            <td><input type="radio" name="tv" value="4"></td>
+                            <td><input type="radio" name="tv" value="5"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <button type="submit" class="submit-btn">SUBMIT</button>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='javascript.js') }}"></script>
+</body>
+</html>
