@@ -11,12 +11,11 @@ def get_connection():
     # Create connection to SQLite database
     conn = sqlite3.connect(db_path)
     
-    # This makes rows behave like dictionaries (optional but helpful)
     conn.row_factory = sqlite3.Row
     
     return conn
 
-# Optional: Helper function to execute queries
+#Helper function to execute queries
 def execute_query(query, params=None):
     conn = get_connection()
     try:

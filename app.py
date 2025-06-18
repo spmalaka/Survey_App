@@ -1,8 +1,13 @@
 from flask import Flask, render_template, request
 from db import get_connection
 from datetime import datetime, date
+import os
+from setup_database import setup_database 
 
 app = Flask(__name__)
+
+# Initialize database
+setup_database() 
 
 @app.route('/')
 def index():
@@ -27,22 +32,6 @@ def submit():
 
     conn = get_connection()
     cursor = conn.cursor()
-
-    # Create table if it doesn't exist (SQLite version)
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS surveys (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            full_name TEXT,
-            email TEXT,
-            contact_number TEXT,
-            date_of_birth DATE,
-            favorite_food TEXT,
-            movies INTEGER,
-            radio INTEGER,
-            eating_out INTEGER,
-            tv INTEGER
-        )
-    """)
 
     # Insert data using SQLite parameter style (? instead of %s)
     cursor.execute("""
@@ -70,8 +59,7 @@ def results():
         conn.close()
         return "No Surveys Available"
 
-    # Convert sqlite3.Row objects to calculate ages
-    # Note: SQLite stores dates as strings, so we need to parse them
+    
     ages = []
     for row in surveys:
         # Convert date string back to date object for calculation
@@ -87,7 +75,7 @@ def results():
     max_age = max(ages) if ages else 0
     min_age = min(ages) if ages else 0
     
-    # Process favorite foods
+   
     foods = []
     for row in surveys:
         if row['favorite_food']:
@@ -132,4 +120,6 @@ def results():
                            ratings=ratings)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    #app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
