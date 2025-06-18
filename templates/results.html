@@ -10,37 +10,60 @@
     <nav>
         <ul class="navbar">
             <li class="logo">_Surveys</li>
-            <li class="nav-links">
+            <button id="navbar-toggle" class="navbar-toggle" aria-label="Toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <li id="main-nav" class="nav-links">
                 <a href="{{ url_for('index') }}"  class = "{{ 'active' if request.endpoint == 'index' else '' }}">FILL OUT SURVEY</a>
                 <a href="{{ url_for('results') }}" class="{{ 'active' if request.endpoint == 'results' else '' }}">VIEW SURVEY RESULTS</a>
             </li>
         </ul>       
     </nav>
-      
     <h2>Survey Results</h2>
-
     <div class="results-container">
         {% if total_surveys == 0 %}
-            <p>No Surveys Available.</p>
+            <p class="no-surveys">No Surveys Available</p>
         {% else %}
             <div class="results-grid">
-                <div class="label">Total number of surveys :</div><div class="value">{{ total }}</div>
-                <div class="label">Average Age :</div><div class="value">{{ avg_age }}</div>
-                <div class="label">Oldest person who participated in survey :</div><div class="value">{{ max_age }}</div>
-                <div class="label">Youngest person who participated in survey :</div><div class="value">{{ min_age }}</div>
+                <div class="section-title">Participant Statistics</div>
+                <div class="label">Total number of surveys:</div>
+                <div class="value">{{ total }}</div>
+                
+                <div class="label">Average age:</div>
+                <div class="value">{{ avg_age }}</div>
+                
+                <div class="label">Oldest person who participated in survey :</div>
+                <div class="value">{{ max_age }}</div>
+                
+                <div class="label">Youngest person who participated in survey :</div>
+                <div class="value">{{ min_age }}</div>
             </div>
-
+    
             <div class="results-grid">
-                <div class="label">Percentage of people who like Pizza :</div><div class="value">{{ food_stats["pizza"] }}%</div>
-                <div class="label">Percentage of people who like Pasta :</div><div class="value">{{ food_stats["pasta"] }}%</div>
-                <div class="label">Percentage of people who like Pap and Wors :</div><div class="value">{{ food_stats["Pap and Wors"] }}%</div>
+                <div class="section-title">Food Preferences</div>
+                <div class="label">Percentage of people who like Pizza:</div>
+                <div class="value">{{ food_stats["pizza"] }}%</div>
+                
+                <div class="label">Percentage of people who like Pasta:</div>
+                <div class="value">{{ food_stats["pasta"] }}%</div>
+                
+                <div class="label">Percentage of people who like Pap and Wors:</div>
+                <div class="value">{{ food_stats["Pap and Wors"] }}%</div>
             </div>
-
+    
             <div class="results-grid">  
-                <div class="label">People who like to watch movies :</div><div class="value">{{ ratings["movies"] }}</div>
-                <div class="label">People who like to listen to radio :</div><div class="value">{{ ratings["radio"] }}</div>
-                <div class="label">People who like to eat out :</div><div class="value">{{ ratings["eating_out"] }}</div>
-                <div class="label">People who like to watch TV :</div><div class="value">{{ ratings["tv"] }}</div>
+                <div class="section-title">Activity Preferences</div>
+                <div class="label">People who like to watch movies:</div>
+                <div class="value">{{ ratings["movies"] }}</div>
+                
+                <div class="label">People who like to listen to radio:</div>
+                <div class="value">{{ ratings["radio"] }}</div>
+                
+                <div class="label">People who like to eat out:</div>
+                <div class="value">{{ ratings["eating_out"] }}</div>
+                
+                <div class="label">People who like to watch TV:</div>
+                <div class="value">{{ ratings["tv"] }}</div>
             </div>
         {% endif %}
     </div>

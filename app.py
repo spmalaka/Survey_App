@@ -50,7 +50,6 @@ def results():
     conn = get_connection()
     cursor = conn.cursor()
     
-    # SQLite doesn't have dictionary=True, but we set row_factory in db.py
     cursor.execute("SELECT * FROM surveys")
     surveys = cursor.fetchall()
 
@@ -84,9 +83,9 @@ def results():
     total_foods = len(foods)
     if total_foods > 0:
         food_stats = {
-            "pizza": round((foods.count("Pizza") / total_foods) * 100, 1),
-            "pasta": round((foods.count("Pasta") / total_foods) * 100, 1),
-            "Pap and Wors": round((foods.count("Pap and Wors") / total_foods) * 100, 1),
+            "pizza": round((foods.count("Pizza") / total_surveys) * 100, 1),
+            "pasta": round((foods.count("Pasta") / total_surveys) * 100, 1),
+            "Pap and Wors": round((foods.count("Pap and Wors") / total_surveys) * 100, 1),
         }
     else:
         food_stats = {

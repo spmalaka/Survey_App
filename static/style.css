@@ -1,6 +1,7 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
+    margin: 0;
+
 }
 
 h2 {
@@ -12,14 +13,19 @@ h2 {
     justify-content: space-between;
     align-items: center;
     list-style: none;
-    padding: 10px 20px;
+    padding: 15px 30px;
     margin-bottom: 30px;
+    margin-top: 0;
+    height: 45px;
+    position: relative;
+    z-index: 1000;
 }
 
 .logo {
     font-weight: bold;
     font-size: 16px;
 }
+
 
 .nav-links {
     display: flex;
@@ -46,6 +52,8 @@ h2 {
     font-weight: normal;
     font-size: 12px;
 }
+
+
 
 .form-container {
   max-width: 700px;
@@ -82,11 +90,16 @@ input[type="text"],
 input[type="email"], 
 input[type="date"] {
   padding: 6px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   border: 1px solid #40d5fa;
   border-radius: 3px;
   width: 300px;
   font-size: 14px;
+}
+
+.error-message{
+  font-size: 14px;
+  color: red;
 }
 
 .checkbox-group {
@@ -94,6 +107,19 @@ input[type="date"] {
   gap: 20px;
   margin-top: 10px;
   
+}
+
+.error-highlight {
+  background-color: #ffe6e6 !important;
+  border: 2px solid #ff0000 !important;
+  border-radius: 4px;
+  padding: 5px;
+  transition: all 0.3s ease;
+}
+
+.checkbox-group.error-highlight {
+  padding: 5px;
+  margin: 5px 0;
 }
 
 .checkbox-item {
@@ -170,43 +196,220 @@ input[type="date"] {
   background-color: #45a049;
 }
 
-/***RESULTS PAGE*****/
-table {
-  margin-top: 10px;
-  border-collapse: collapse;
-  width: 100%;
-  text-align: center;
-}
-  
-table th, table td {
-  padding: 10px;
+/* Mobile hamburger menu button */
+.navbar-toggle {
+  display: none; /* Hidden on desktop */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  z-index: 1001;
 }
 
+
+/* Hamburger icon */
+.hamburger {
+  display: block;
+    width: 25px;
+    height: 2px;
+    background-color: #333;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/*.hamburger,*/ 
+.hamburger::before,
+.hamburger::after {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 2px;
+  background-color: #333;
+  left: 0;
+  transition: all 0.3s ease;
+}
+
+.hamburger::before {
+  top: -6px;
+}
+
+.hamburger::after {
+  bottom: -6px;
+}
+
+/* Hamburger animation when active */
+.navbar-toggle.active .hamburger {
+  background: transparent;
+}
+
+.navbar-toggle.active .hamburger::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+
+.navbar-toggle.active .hamburger::after {
+  transform: rotate(-45deg);
+  top: 0;
+}
+
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .nav-links:not(.active) {
+      display: none !important;
+  }
+  
+  /* Show when active */
+  .nav-links.active {
+      display: flex !important;
+      flex-direction: column;
+      margin-top: 15px;
+      margin-right: 25px;
+      background: white;
+      padding: 10px 0;
+  }
+  
+  .navbar-toggle {
+      display: block !important;
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+  }
+}
+
+
+/* Form responsiveness*/
+@media (max-width: 768px) {
+  .form-container {
+    padding: 1rem;
+    margin: 0 1rem;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="date"],
+  select {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px; 
+  }
+  
+  /* Table responsiveness for rating questions */
+  .rating-table {
+    overflow-x: auto;
+    display: block;
+    white-space: nowrap;
+  }
+  
+  .rating-table table {
+    width: 100%;
+    min-width: 600px; 
+  }
+  
+  /* Checkbox group stacking */
+  .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+  
+  /* Button responsiveness */
+  button,
+  input[type="submit"] {
+    width: 100%;
+    padding: 0.875rem;
+    font-size: 1rem;
+    margin-top: 1rem;
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (max-width: 768px) and (orientation: landscape) {
+  .navbar-nav {
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+}
+
+/***RESULTS PAGE*****/
 .results-container {
-  max-width: 650px;
-  margin: 50px auto;
-  padding: 20px;
-  text-align: center;
-  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  overflow: hidden;
 }
 
 .results-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px 30px;
-    margin-top: 20px;
-    justify-content: center;
-    font-size: 15px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px 20px;
+  padding: 20px;
+  border-bottom: 1px solid #f1f5f9;
 }
 
-.results-grid .label {
-    text-align: left;
-    font-weight: normal;
-
+.results-grid:last-child {
+  border-bottom: none;
 }
 
-.results-grid .value {
-    text-align: right;
+.label {
+  font-weight: 500;
+  color: #64748b;
+  padding: 6px 0;
 }
 
+.value {
+  font-weight: 600;
+  color: #3b82f6;
+  padding: 6px 0;
+  text-align: right;
+}
+
+.no-surveys {
+  text-align: center;
+  padding: 30px;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+.section-title {
+  grid-column: span 2;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px dashed #e2e8f0;
+}
+
+@media (max-width: 600px) {
+  .results-grid {
+      grid-template-columns: 1fr;
+      gap: 5px;
+  }
   
+  .value {
+      text-align: left;
+      padding-top: 0;
+  }
+  
+  .section-title {
+      grid-column: span 1;
+  }
+}
+
