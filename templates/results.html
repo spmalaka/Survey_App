@@ -11,8 +11,8 @@
         <ul class="navbar">
             <li class="logo">_Surveys</li>
             <li class="nav-links">
-                <a href="{{ url_for('index') }}">FILL OUT SURVEY</a>
-                <a href="{{ url_for('results') }}">VIEW SURVEY RESULTS</a>
+                <a href="{{ url_for('index') }}"  class = "{{ 'active' if request.endpoint == 'index' else '' }}">FILL OUT SURVEY</a>
+                <a href="{{ url_for('results') }}" class="{{ 'active' if request.endpoint == 'results' else '' }}">VIEW SURVEY RESULTS</a>
             </li>
         </ul>       
     </nav>

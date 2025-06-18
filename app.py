@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from db import get_connection
 from datetime import datetime, date
 import os
@@ -11,7 +11,7 @@ setup_database()
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    return render_template("index.html", current_page='index')
 
 @app.route('/submit', methods=['POST'])
 def submit():
@@ -43,7 +43,7 @@ def submit():
     cursor.close()
     conn.close()
 
-    return render_template("index.html")
+    return redirect(url_for('index'))
 
 @app.route('/results')
 def results():

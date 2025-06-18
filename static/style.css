@@ -28,7 +28,8 @@ h2 {
 
 .nav-links a.active {
   color: #40d5fa;
-  font-weight: bold;
+  border-bottom: 1px solid #40d5fa;
+
 }
 
 .nav-links a:hover {
