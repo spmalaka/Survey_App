@@ -55,8 +55,8 @@ def results():
 
     if not surveys:
         cursor.close()
-        conn.close()
-        return "No Surveys Available"
+        conn.close() 
+        return render_template('results.html', total_surveys=0)
 
     
     ages = []
